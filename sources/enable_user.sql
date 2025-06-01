@@ -1,0 +1,1 @@
+ALTER LOGIN [sysdev.yn] SET ENABLE;
