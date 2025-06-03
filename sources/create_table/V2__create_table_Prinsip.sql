@@ -1,0 +1,1 @@
+CREATE TABLE dbo.Prinsip (ID INT, Nama VARCHAR(50), Tanggal DATETIME);

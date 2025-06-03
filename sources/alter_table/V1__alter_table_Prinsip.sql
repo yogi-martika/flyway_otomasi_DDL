@@ -1,0 +1,1 @@
+ALTER TABLE dbo.Prinsip ADD Flag BIT,Biaya DECIMAL(18,2);
