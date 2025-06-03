@@ -1,1 +1,0 @@
-CREATE TABLE dbo.Pemirsah (ID INT,Nama VARCHAR(50));
