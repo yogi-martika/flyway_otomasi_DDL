@@ -1,0 +1,13 @@
+name: Create Table Flyway
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  migrate:
+    runs-on: self-hosted
+    steps:
+      - name: Run Flyway migration
+        run: ./flyway migrate
