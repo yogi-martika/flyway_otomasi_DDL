@@ -1,0 +1,12 @@
+name: CI test
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test-runner:
+    runs-on: self-hosted
+    steps:
+      - name: Hello world
+        run: echo "Runner aktif dan jalan bro!"
