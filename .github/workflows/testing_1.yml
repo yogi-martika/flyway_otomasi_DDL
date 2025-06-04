@@ -1,0 +1,12 @@
+name: CI test dari lokal
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  runner-lokal:
+    runs-on: self-hosted
+    steps:
+      - name: Kita akan tes
+        run: echo "Kiriman dari runner loka bro!"
