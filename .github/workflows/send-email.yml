@@ -17,7 +17,7 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: '🚀 Flyway Migration Notification'
           to: yogi.martika@inhealth.co.id                  # Email tujuan
-          from: noreply@inhealth.co.id       # Email pengirim (biasanya sama dgn username)
+          from: yogi.martika@inhealth.co.id        # Email pengirim (biasanya sama dgn username)
           body: |
             Hello DevOps,
 
