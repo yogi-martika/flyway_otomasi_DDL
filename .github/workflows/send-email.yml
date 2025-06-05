@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Send Email via SMTP
-        uses: dawidd6/action-send-mail@v3
+        uses: dev-drprasad/send-email@v1.3
         with:
           server_address: smtp.sendgrid.net          # Ganti sesuai SMTP kamu
           server_port: 587                        # Gunakan 587 untuk TLS, 465 untuk SSL
@@ -17,7 +17,6 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: '🚀 Flyway Migration Notification'
           to: yogi.martika@inhealth.co.id                  # Email tujuan
-          from: noreply@inhealth.co.id        # Email pengirim (biasanya sama dgn username)
           body: |
             Hello DevOps,
 
@@ -26,3 +25,4 @@ jobs:
 
             Salam,
             GitHub Actions
+
