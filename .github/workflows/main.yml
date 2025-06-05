@@ -1,12 +1,15 @@
 name: CI test
 
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      pesan:
+        description: 'Isi pesanmu'
+        required: true
 
 jobs:
   test-runner:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest 
     steps:
       - name: Hello world
-        run: echo "Runner aktif dan jalan bro!"
+        run: echo ${{ github.event.inputs.pesan }}
