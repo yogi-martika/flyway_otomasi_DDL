@@ -1,0 +1,28 @@
+name: Send Email Notification
+
+on:
+  workflow_dispatch: # Bisa dijalankan manual dari GitHub UI
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Email via SMTP
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.sendgrid.net          # Ganti sesuai SMTP kamu
+          server_port: 587                        # Gunakan 587 untuk TLS, 465 untuk SSL
+          username: ${{ secrets.MAIL_USERNAME }}  # Disimpan di GitHub Secrets
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: '🚀 Flyway Migration Notification'
+          to: yogi.martika@inhealth.co.id                  # Email tujuan
+          from: noreply@inhealth.co.id       # Email pengirim (biasanya sama dgn username)
+          body: |
+            Hello DevOps,
+
+            Flyway migration baru saja dipush ke branch `main`.
+            Silakan review dan jalankan pipeline.
+
+            Salam,
+            GitHub Actions
