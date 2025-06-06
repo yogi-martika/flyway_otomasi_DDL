@@ -3,21 +3,22 @@ name: Github Flyway Migration (Dynamic DB & Host)
 on:                          
   workflow_dispatch:
     inputs:
-      location:
-        description: 'Target database name and folder (e.g., mydb1)'
-        required: true
       hostname:
         description: 'Target DB host/IP (e.g., 10.1.2.3)'
         required: true
-
+      dbname:
+        description: 'Target database name (e.g., mydb1)'
+        required: true
 jobs:
   flyway-migrate:
     runs-on: self-hosted   
     steps:                        
       - name: Run Flyway migrate
         env:
-          FLYWAY_URL: jdbc:sqlserver://${{ github.event.inputs.hostname }}:1433;databaseName=${{ github.event.inputs.location }};trustServerCertificate=true
+          FLYWAY_URL: jdbc:sqlserver://${{ github.event.inputs.hostname }}:1433;databaseName=${{ github.event.inputs.dbname }};trustServerCertificate=true
           FLYWAY_USER: ${{ secrets.DB_USER }}
           FLYWAY_PASSWORD: ${{ secrets.DB_PASS }}
-          FLYWAY_LOCATIONS: filesystem:/opt/Git-Local/PRD/DB_MSSQL/${{ github.event.inputs.location }}/create_table,filesystem:/opt/Git-Local/PRD/DB_MSSQL/${{ github.event.inputs.location }}/alter_table
+          FLYWAY_LOCATIONS: >
+           filesystem:/opt/Git-Local/PRD/DB_MSSQL/${{ github.event.inputs.dbname }}/create_table,
+           filesystem:/opt/Git-Local/PRD/DB_MSSQL/${{ github.event.inputs.dbname }}/alter_table
         run: flyway migrate
