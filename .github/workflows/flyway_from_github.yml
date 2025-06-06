@@ -17,5 +17,7 @@ jobs:
       - name: Run Flyway migrate
         env:
           FLYWAY_URL: jdbc:sqlserver://${{ github.event.inputs.hostname }}:1433;databaseName=${{ github.event.inputs.location }};trustServerCertificate=true
+          FLYWAY_USER: ${{ secrets.DB_USER }}
+          FLYWAY_PASSWORD: ${{ secrets.DB_PASS }}
           FLYWAY_LOCATIONS: filesystem:/opt/Git-Local/PRD/DB_MSSQL/${{ github.event.inputs.location }}/create_table,filesystem:/opt/Git-Local/PRD/DB_MSSQL/${{ github.event.inputs.location }}/alter_table
         run: flyway migrate
