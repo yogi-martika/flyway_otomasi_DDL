@@ -1,4 +1,4 @@
-name: Github Flyway Migration (Dynamic DB & Host)
+name: Deploy Database Existing
 
 on:                          
   workflow_dispatch:
