@@ -1,0 +1,27 @@
+name: Deploy Database New
+
+on:                          
+  workflow_dispatch:
+    inputs:
+      hostname:
+        description: 'Target DB host/IP (e.g., 10.1.2.3)'
+        required: true
+      dbname:
+        description: 'Target database name (e.g., mydb1)'
+        required: true
+      env:
+       description: 'Pilih env: PROD/STG'
+       required: true
+       
+jobs:
+  flyway-migrate:
+    runs-on: self-hosted   
+    steps:                        
+      - name: Run Flyway migrate
+        env:
+          FLYWAY_URL: jdbc:sqlserver://${{ github.event.inputs.hostname }}:1433;databaseName=${{ github.event.inputs.dbname }};trustServerCertificate=true
+          FLYWAY_USER: ${{ secrets.DB_USER }}
+          FLYWAY_PASSWORD: ${{ secrets.DB_PASS }}
+          FLYWAY_LOCATIONS: >
+           filesystem:/mnt/db_mssql/NEW/${{ github.event.inputs.env }}/RESTORE/${{ github.event.inputs.dbname }}
+        run: flyway migrate
