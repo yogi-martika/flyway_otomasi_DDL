@@ -9,6 +9,10 @@ on:
       dbname:
         description: 'Target database name (e.g., mydb1)'
         required: true
+      env:
+       description: 'Pilih env: PROD/STG'
+       required: true
+       
 jobs:
   flyway-migrate:
     runs-on: self-hosted   
@@ -19,6 +23,5 @@ jobs:
           FLYWAY_USER: ${{ secrets.DB_USER }}
           FLYWAY_PASSWORD: ${{ secrets.DB_PASS }}
           FLYWAY_LOCATIONS: >
-           filesystem:/opt/Git-Local/PRD/DB_MSSQL/${{ github.event.inputs.dbname }}/create_table,
-           filesystem:/opt/Git-Local/PRD/DB_MSSQL/${{ github.event.inputs.dbname }}/alter_table
+           filesystem:/mnt/db_mssql/EXS/${{ github.event.inputs.env }}/${{ github.event.inputs.dbname }}
         run: flyway migrate
